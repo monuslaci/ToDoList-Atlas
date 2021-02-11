@@ -1,0 +1,32 @@
+<%- include("partials/header") -%>
+<div class="box" id="heading">
+  <h1>To-do list</h1>
+</div>
+
+
+
+
+<div class="box">
+  <% for( let i = 0; i < listItemName.length; i++ ) { %>
+<!--   to be able to send data when the checkbox is checked I need a form and a post route, I need to wrap these items inside the form, since I need the checkbox-->
+<!-- this will post to /delete route -->
+<form action="/delete" method="post">
+  <div class="item">
+    <!-- when the checkbox is changed, than we run this line of javascript code: "this.form.submit()" and it will submit the form -->
+    <!-- since it will create as many checkboxes as the listItemName.length, and we pass an  , each of these items that we are looping through has a name and an ID, too, so if I bind that ID to each of the checkboxes, than when it gets checked I can submit the form, and find out which item was checked -->
+    <input type="checkbox" name="formCheckbox" value="<%=listItemName[i]._id%>" onChange="this.form.submit()">
+    <p> <%= listItemName[i].name %> </p>
+  </div>
+
+</form>
+  <% } %>
+
+  <!-- this will send a post request to the root route after pressing the submit button-->
+  <form action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+    <button type="submit">+</button>
+  </form>
+
+</div>
+
+<%- include("partials/footer") %>
